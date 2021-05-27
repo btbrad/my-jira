@@ -11,7 +11,7 @@ const ProjectList = () => {
   const [projectList, setProjectList] = useState([])
 
   useEffect(() => {
-    fetch(`${apiUrl}/projectList?${projName ? `name=${projName}`: ''}${userName ? `&userId=${userName}` : ''}`)
+    fetch(`${apiUrl}/projectList?${projName ? `q=${projName}`: ''}${userName ? `&userId=${userName}` : ''}`)
       .then(response => {
         if (response.ok) {
           return  response.json()
