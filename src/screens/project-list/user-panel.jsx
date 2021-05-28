@@ -1,35 +1,33 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import { useMount } from '../../utils/index'
 const apiUrl = process.env.REACT_APP_BASE_URL
 
 console.log(process.env)
-const UserPanel = ({projName, setProjName, userName, setUserName}) => {
+const UserPanel = ({params, setParams}) => {
 
   const [userList, setUserList] = useState([])
 
-  useEffect(() => {
-    fetch(`${apiUrl}/userList`)
-      .then(response => {
+  useMount(() => {
+    fetch(`${apiUrl}/users`)
+      .then(async response => {
         if (response.ok) {
-          return  response.json()
+          setUserList(await response.json())
         }
       })
-      .then(data => {
-        console.log(data)
-        setUserList(data)
-      }
-    ) 
-  }, [])
+  })
 
   return (
     <div>
-    <input type="text" value={projName} onChange={ ({target}) => setProjName(target.value)}/>
-    <select value={userName} onChange={({target}) => {
-      console.log(111, target.value)
-      setUserName(target.value)
+    <input type="text" value={params.name} onChange={ ({target}) => setParams({ ...params, name: target.value})}/>
+    <select value={params.userId} onChange={({target}) => {
+      setParams({
+        ...params,
+        userId: target.value
+      })
     }}>
       <option value="">负责人</option>
       {
-        userList.map(item => {
+        userList?.map(item => {
           return <option value={item.id} key={item.id}>{item.name}</option>
         })
       }
