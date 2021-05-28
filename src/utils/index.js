@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const useMount = (callback) => {
   useEffect(() => {
@@ -16,4 +16,26 @@ export const cleanObject = (obj) => {
     }
   });
   return result;
+};
+
+export const useDebounce = (fn, delay) => {
+  const timer = null;
+  return (...args) => {
+    timer && clearTimeout(timer);
+    setTimeout(() => {
+      fn(...args);
+    }, delay);
+  };
+};
+
+export const useDebouncedParam = (param, delay) => {
+  const [debouncedParam, setDebouncedParam] = useState(param);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedParam(param);
+    }, delay);
+    return () => clearTimeout(timer);
+  }, [param, delay]);
+
+  return debouncedParam;
 };

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import * as qs from 'qs'
 import UserPanel from './user-panel.jsx'
 import ProjectTable from './project-table.jsx'
-import { cleanObject } from '../../utils/index'
+import { cleanObject, useDebouncedParam } from '../../utils/index'
 
 const apiUrl = process.env.REACT_APP_BASE_URL
 
@@ -13,6 +13,8 @@ const ProjectList = () => {
     name: ''
   })
   const [projectList, setProjectList] = useState([])
+
+  const debouncedParams = useDebouncedParam(params, 2000)
 
   useEffect(() => {
     fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(params))}`)
@@ -26,7 +28,7 @@ const ProjectList = () => {
         setProjectList(data)
       }
     ) 
-  }, [params])
+  }, [debouncedParams])
 
   return (
     <div>
