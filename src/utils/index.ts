@@ -42,3 +42,24 @@ export const useDebouncedParam = <T>(param: T, delay: number) => {
 
   return debouncedParam;
 };
+
+export const useArray = <T>(array: T[]) => {
+  const [value, setValue] = useState(array);
+  const clear = () => {
+    setValue([]);
+  };
+  const removeIndex = (index: number) => {
+    const copy = [...value];
+    copy.splice(index, 1);
+    setValue([...copy]);
+  };
+  const add = (item: T) => {
+    setValue([...value, item]);
+  };
+  return {
+    value,
+    clear,
+    removeIndex,
+    add,
+  };
+};
