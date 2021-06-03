@@ -6,7 +6,7 @@ export const useMount = (callback: () => void) => {
   }, []);
 };
 
-export const isFalsy: (value: any) => boolean = (value) =>
+export const isFalsy: (value: unknown) => boolean = (value) =>
   value === 0 ? false : !value;
 
 export const cleanObject = (obj: object) => {
@@ -31,7 +31,7 @@ export const useDebounce = (fn: Function, delay: number) => {
   };
 };
 
-export const useDebouncedParam = (param: any, delay: number) => {
+export const useDebouncedParam = <T>(param: T, delay: number) => {
   const [debouncedParam, setDebouncedParam] = useState(param);
   useEffect(() => {
     const timer = setTimeout(() => {

@@ -16,7 +16,7 @@ const ProjectList = () => {
   const debouncedParams = useDebouncedParam(params, 2000);
 
   useEffect(() => {
-    fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(params))}`)
+    fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(debouncedParams))}`)
       .then((response) => {
         if (response.ok) {
           return response.json();
