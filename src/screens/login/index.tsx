@@ -1,5 +1,7 @@
 import React, { useState, ChangeEvent } from "react";
 
+const apiUrl = process.env.REACT_APP_BASE_URL;
+
 const Login = () => {
   const [formData, setFormData] = useState({
     username: "",
@@ -25,8 +27,22 @@ const Login = () => {
     });
   };
 
-  const login = () => {
+  const login = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     console.log("login", formData);
+    fetch(`${apiUrl}/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    }).then((response) => {
+      if (response.ok) {
+        response.json().then((res) => {
+          console.log(res);
+        });
+      }
+    });
   };
 
   return (
