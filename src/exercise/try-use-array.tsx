@@ -1,7 +1,7 @@
 import React from "react";
 import { useMount, useArray } from "../utils/index";
 
-export default () => {
+const UseArrayTest = () => {
   const persons: { name: string; age: number }[] = [
     { name: "Pony", age: 35 },
     { name: "Ma", age: 47 },
@@ -35,3 +35,5 @@ export default () => {
     </div>
   );
 };
+
+export default UseArrayTest;
