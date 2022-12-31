@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 export const useMount = (callback: () => void) => {
   useEffect(() => {
     callback();
-  }, []);
+  }, [callback]);
 };
 
 export const isFalsy: (value: unknown) => boolean = (value) =>
