@@ -1,10 +1,11 @@
 module.exports = (req, res, next) => {
   if (req.method === "POST" && req.path === "/login") {
     const { username, password } = req.body;
-    if (username === "Brad" && password === "123456") {
+    if (username === "admin" && password === "123456") {
       return res.status(200).json({
         user: {
           token: "bea1234354drt3453245we14kh",
+          name: username,
         },
       });
     } else {

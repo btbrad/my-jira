@@ -10,9 +10,10 @@ interface UserPanelProps {
   setParams: (params: UserPanelProps["params"]) => void;
 }
 
-interface User {
+export interface User {
   id: number;
   name: string;
+  token: string;
 }
 
 const UserPanel = ({ params, setParams }: UserPanelProps) => {
