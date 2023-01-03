@@ -4,6 +4,7 @@ module.exports = (req, res, next) => {
     if (username === "admin" && password === "123456") {
       return res.status(200).json({
         user: {
+          id: 1,
           token: "bea1234354drt3453245we14kh",
           name: username,
         },
@@ -13,6 +14,7 @@ module.exports = (req, res, next) => {
         message: "用户名和密码错误",
       });
     }
+  } else {
     next();
   }
 };

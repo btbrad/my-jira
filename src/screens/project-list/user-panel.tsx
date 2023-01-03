@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useMount } from "../../utils/index";
+import React, { useEffect, useState } from "react";
+// import { useMount } from "../../utils/index";
 const apiUrl = process.env.REACT_APP_BASE_URL;
 
 interface UserPanelProps {
@@ -19,13 +19,21 @@ export interface User {
 const UserPanel = ({ params, setParams }: UserPanelProps) => {
   const [userList, setUserList] = useState([]);
 
-  useMount(() => {
+  // useMount(() => {
+  //   fetch(`${apiUrl}/users`).then(async (response) => {
+  //     if (response.ok) {
+  //       setUserList(await response.json());
+  //     }
+  //   });
+  // });
+
+  useEffect(() => {
     fetch(`${apiUrl}/users`).then(async (response) => {
       if (response.ok) {
         setUserList(await response.json());
       }
     });
-  });
+  }, []);
 
   return (
     <div>

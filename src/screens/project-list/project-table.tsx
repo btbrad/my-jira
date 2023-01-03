@@ -13,7 +13,7 @@ interface List {
 
 const ProjectTable = ({ projectList }: List) => {
   return (
-    <table>
+    <table style={{ margin: "20px auto" }}>
       <thead>
         <tr>
           <th>项目名称</th>
