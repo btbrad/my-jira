@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 // import { useMount } from "../../utils/index";
-const apiUrl = process.env.REACT_APP_BASE_URL;
+import { useHttp } from "../../utils/http";
+// const apiUrl = process.env.REACT_APP_BASE_URL;
 
 interface UserPanelProps {
   params: {
@@ -27,12 +28,16 @@ const UserPanel = ({ params, setParams }: UserPanelProps) => {
   //   });
   // });
 
+  const client = useHttp();
+
   useEffect(() => {
-    fetch(`${apiUrl}/users`).then(async (response) => {
-      if (response.ok) {
-        setUserList(await response.json());
-      }
-    });
+    // fetch(`${apiUrl}/users`).then(async (response) => {
+    //   if (response.ok) {
+    //     setUserList(await response.json());
+    //   }
+    // });
+    client("users").then((data) => setUserList(data));
+    // eslint-disable-next-line
   }, []);
 
   return (

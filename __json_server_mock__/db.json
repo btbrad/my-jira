@@ -1,4 +1,11 @@
 {
+  "me": {
+    "user": {
+      "name": "admin",
+      "id": 1,
+      "token": "bea1234354drt3453245we14kh"
+    }
+  },
   "users": [
     {
       "name": "Harry",
