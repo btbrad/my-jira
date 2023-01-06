@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { User } from "screens/project-list/user-panel";
 import * as auth from "../auth-provider";
-import { http } from "../utils/http";
+import { http } from "@/utils/http";
 
 interface AuthForm {
   username: string;
