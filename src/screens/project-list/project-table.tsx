@@ -1,4 +1,6 @@
+import { Table } from "antd";
 import React from "react";
+import type { ColumnsType } from "antd/es/table";
 
 interface Project {
   id: number;
@@ -11,26 +13,30 @@ interface List {
   projectList: Project[];
 }
 
+const columns: ColumnsType<Project> = [
+  {
+    title: "项目名称",
+    dataIndex: "name",
+    key: "name",
+    sorter: (a, b) => a.name.localeCompare(b.name),
+  },
+  {
+    title: "负责人",
+    dataIndex: "user",
+    key: "user",
+  },
+];
+
 const ProjectTable = ({ projectList }: List) => {
   return (
-    <table style={{ margin: "20px auto" }}>
-      <thead>
-        <tr>
-          <th>项目名称</th>
-          <th>负责人</th>
-        </tr>
-      </thead>
-      <tbody>
-        {projectList.map((item: Project) => {
-          return (
-            <tr key={item.id}>
-              <td>{item.name}</td>
-              <td>{item.user}</td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+    <>
+      <Table
+        columns={columns}
+        dataSource={projectList}
+        rowKey={(record) => record.id}
+        pagination={false}
+      ></Table>
+    </>
   );
 };
 

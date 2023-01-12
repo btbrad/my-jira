@@ -1,3 +1,4 @@
+import { Input, Select } from "antd";
 import React, { useEffect, useState } from "react";
 // import { useMount } from "../../utils/index";
 import { useHttp } from "../../utils/http";
@@ -41,22 +42,22 @@ const UserPanel = ({ params, setParams }: UserPanelProps) => {
   }, []);
 
   return (
-    <div>
-      <input
+    <>
+      <Input
         type="text"
         value={params.name}
         onChange={({ target }) => setParams({ ...params, name: target.value })}
       />
-      <select
+      <Select
         value={params.userId}
-        onChange={({ target }) => {
+        onChange={(value) => {
           setParams({
             ...params,
-            userId: target.value,
+            userId: value,
           });
         }}
       >
-        <option value="">负责人</option>
+        <Select.Option value="">负责人</Select.Option>
         {userList?.map((item: User) => {
           return (
             <option value={item.id} key={item.id}>
@@ -64,8 +65,8 @@ const UserPanel = ({ params, setParams }: UserPanelProps) => {
             </option>
           );
         })}
-      </select>
-    </div>
+      </Select>
+    </>
   );
 };
 
