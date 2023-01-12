@@ -7,7 +7,7 @@ import { Form, Input, Button } from "antd";
 const Login = () => {
   const authContext = useAuth();
 
-  const onFinish = (values: any) => {
+  const onFinish = (values: { username: string; password: string }) => {
     console.log("Success:", values);
     authContext.login({ ...values });
   };
@@ -21,8 +21,6 @@ const Login = () => {
       {authContext.user ? `当前用户：${authContext.user.name}` : ""}
       <Form
         initialValues={{ username: "admin", password: "123456" }}
-        labelCol={{ offset: 8, span: 2 }}
-        wrapperCol={{ span: 4 }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
       >
@@ -31,7 +29,7 @@ const Login = () => {
           name="username"
           rules={[{ required: true, message: "请输入用户名!" }]}
         >
-          <Input placeholder="用户名" />
+          <Input placeholder="用户" />
         </Form.Item>
         <Form.Item
           label="密码"
