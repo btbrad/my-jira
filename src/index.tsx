@@ -4,12 +4,23 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { AppProviders } from "context";
+import "antd/dist/reset.css";
+import { ConfigProvider } from "antd";
 
 ReactDOM.render(
   <React.StrictMode>
-    <AppProviders>
-      <App />
-    </AppProviders>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: "rgb(0, 82, 204)",
+          fontSize: 16,
+        },
+      }}
+    >
+      <AppProviders>
+        <App />
+      </AppProviders>
+    </ConfigProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

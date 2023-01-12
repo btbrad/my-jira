@@ -1,76 +1,51 @@
 import { useAuth } from "context/auth-context";
-import React, { useState, ChangeEvent } from "react";
+import React from "react";
+import { Form, Input, Button } from "antd";
 
 // const apiUrl = process.env.REACT_APP_BASE_URL;
 
 const Login = () => {
   const authContext = useAuth();
 
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-  });
-
-  // const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   console.log(event)
-  // }
-
-  const handleUsernameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      username: event.target.value,
-    });
+  const onFinish = (values: any) => {
+    console.log("Success:", values);
+    authContext.login({ ...values });
   };
 
-  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      password: event.target.value,
-    });
-  };
-
-  const login = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    console.log("login", formData);
-    // fetch(`${apiUrl}/login`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(formData),
-    // }).then((response) => {
-    //   if (response.ok) {
-    //     response.json().then((res) => {
-    //       console.log(res);
-    //     });
-    //   }
-    // });
-    authContext.login(formData);
+  const onFinishFailed = (errorInfo: any) => {
+    console.log("Failed:", errorInfo);
   };
 
   return (
     <>
       {authContext.user ? `当前用户：${authContext.user.name}` : ""}
-      <form>
-        <label htmlFor="username">用户：</label>
-        <input
-          type="text"
+      <Form
+        initialValues={{ username: "admin", password: "123456" }}
+        labelCol={{ offset: 8, span: 2 }}
+        wrapperCol={{ span: 4 }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+      >
+        <Form.Item
+          label="用户"
           name="username"
-          value={formData.username}
-          onChange={handleUsernameChange}
-        />
-        <br />
-        <label htmlFor="password">密码：</label>
-        <input
-          type="password"
+          rules={[{ required: true, message: "请输入用户名!" }]}
+        >
+          <Input placeholder="用户名" />
+        </Form.Item>
+        <Form.Item
+          label="密码"
           name="password"
-          value={formData.password}
-          onChange={handlePasswordChange}
-        />
-        <br />
-        <button onClick={login}>登录</button>
-      </form>
+          rules={[{ required: true, message: "请输入密码!" }]}
+        >
+          <Input.Password placeholder="密码" />
+        </Form.Item>
+        <Form.Item wrapperCol={{ offset: 4, span: 16 }}>
+          <Button type="primary" htmlType="submit">
+            登录
+          </Button>
+        </Form.Item>
+      </Form>
     </>
   );
 };
