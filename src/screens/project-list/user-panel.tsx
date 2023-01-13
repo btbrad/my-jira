@@ -1,4 +1,5 @@
-import { Input, Select } from "antd";
+/** @jsxImportSource @emotion/react */
+import { Form, Input, Select } from "antd";
 import React, { useEffect, useState } from "react";
 // import { useMount } from "../../utils/index";
 import { useHttp } from "../../utils/http";
@@ -42,31 +43,38 @@ const UserPanel = ({ params, setParams }: UserPanelProps) => {
   }, []);
 
   return (
-    <>
-      <Input
-        type="text"
-        value={params.name}
-        onChange={({ target }) => setParams({ ...params, name: target.value })}
-      />
-      <Select
-        value={params.userId}
-        onChange={(value) => {
-          setParams({
-            ...params,
-            userId: value,
-          });
-        }}
-      >
-        <Select.Option value="">负责人</Select.Option>
-        {userList?.map((item: User) => {
-          return (
-            <Select.Option value={item.id} key={item.id}>
-              {item.name}
-            </Select.Option>
-          );
-        })}
-      </Select>
-    </>
+    <Form css={{ marginBottom: "2rem" }} layout={"inline"}>
+      <Form.Item>
+        <Input
+          type="text"
+          placeholder="项目名称"
+          value={params.name}
+          onChange={({ target }) =>
+            setParams({ ...params, name: target.value })
+          }
+        />
+      </Form.Item>
+      <Form.Item>
+        <Select
+          value={params.userId}
+          onChange={(value) => {
+            setParams({
+              ...params,
+              userId: value,
+            });
+          }}
+        >
+          <Select.Option value="">负责人</Select.Option>
+          {userList?.map((item: User) => {
+            return (
+              <Select.Option value={item.id} key={item.id}>
+                {item.name}
+              </Select.Option>
+            );
+          })}
+        </Select>
+      </Form.Item>
+    </Form>
   );
 };
 

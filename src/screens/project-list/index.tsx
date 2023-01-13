@@ -4,6 +4,7 @@ import UserPanel from "./user-panel";
 import ProjectTable from "./project-table";
 import { cleanObject, useDebouncedParam } from "../../utils/index";
 import { useHttp } from "utils/http";
+import styled from "@emotion/styled";
 
 // const apiUrl = process.env.REACT_APP_BASE_URL;
 
@@ -38,11 +39,15 @@ const ProjectList = () => {
   }, [debouncedParams]);
 
   return (
-    <div>
+    <Container>
       <UserPanel params={params} setParams={setParams} />
       <ProjectTable projectList={projectList} />
-    </div>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  padding: 3.2rem;
+`;
 
 export default ProjectList;
