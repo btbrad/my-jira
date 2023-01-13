@@ -3,7 +3,9 @@
 - create-react-app
 - eslint、preitter、commitlint
 - json-server
-- costume hook
+- custom hook
+- CSS IN JS: emotion
+- Ant-Design
 
 ### TypeScript
 
