@@ -9,12 +9,13 @@ export const useMount = (callback: () => void) => {
 export const isFalsy: (value: unknown) => boolean = (value) =>
   value === 0 ? false : !value;
 
-export const cleanObject = (obj: object) => {
+export const isVoid: (value: unknown) => boolean = (value) =>
+  value === undefined || value === null || value === "";
+
+export const cleanObject = (obj: { [key: string]: unknown }) => {
   const result = { ...obj };
   Object.keys(result).forEach((key) => {
-    // @ts-ignore
-    if (isFalsy(obj[key])) {
-      // @ts-ignore
+    if (isVoid(obj[key])) {
       delete result[key];
     }
   });
