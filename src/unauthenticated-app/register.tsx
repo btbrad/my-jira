@@ -1,6 +1,7 @@
 import { Button, Form, Input } from "antd";
 import { useAuth } from "context/auth-context";
 import React from "react";
+import styled from "@emotion/styled";
 
 // const apiUrl = process.env.REACT_APP_BASE_URL;
 
@@ -34,13 +35,17 @@ const Register = () => {
           <Input.Password placeholder="请输入密码" />
         </Form.Item>
         <Form.Item wrapperCol={{ offset: 4, span: 16 }}>
-          <Button type="primary" htmlType="submit">
+          <LongButton type="primary" htmlType="submit">
             注册
-          </Button>
+          </LongButton>
         </Form.Item>
       </Form>
     </>
   );
 };
+
+const LongButton = styled(Button)`
+  width: 100%;
+`;
 
 export default Register;
