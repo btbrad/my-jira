@@ -60,9 +60,9 @@ const UserPanel = ({ params, setParams }: UserPanelProps) => {
         <Select.Option value="">负责人</Select.Option>
         {userList?.map((item: User) => {
           return (
-            <option value={item.id} key={item.id}>
+            <Select.Option value={item.id} key={item.id}>
               {item.name}
-            </option>
+            </Select.Option>
           );
         })}
       </Select>
